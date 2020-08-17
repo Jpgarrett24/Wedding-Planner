@@ -1,0 +1,27 @@
+@model Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Wedding.WedderOne & @Model.Wedding.WedderTwo's Wedding</title>
+</head>
+<body>
+    <header>
+        <h1>@Model.Wedding.WedderOne & @Model.Wedding.WedderTwo's Wedding!</h1>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Log Out</a>
+    </header>
+    <main>
+        <h3>Date: @Model.Wedding.Date.ToString("MMMM d, yyyy")</h3>
+        <h4>Guests: </h4>
+        <ul>
+            @foreach (GuestList guest in Model.Wedding.Guests)
+            {
+                <p>@guest.User.FirstName @guest.User.LastName</p>
+            }
+        </ul>
+    </main>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</body>
+</html>

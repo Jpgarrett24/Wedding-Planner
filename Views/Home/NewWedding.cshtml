@@ -1,0 +1,37 @@
+@model Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Wedding</title>
+</head>
+<body>
+    <header>
+        <h1>Plan Your Wedding</h1>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Log Out</a>
+    </header>
+    <main>
+        <form asp-action="CreateWedding" asp-controller="Home" method="POST">
+            <span asp-validation-for="Wedding.WedderOne"></span>
+            <label asp-for="Wedding.WedderOne"></label>
+            <input asp-for="Wedding.WedderOne">
+            <br>
+            <span asp-validation-for="Wedding.WedderTwo"></span>
+            <label asp-for="Wedding.WedderTwo"></label>
+            <input asp-for="Wedding.WedderTwo">
+            <br>
+            <span asp-validation-for="Wedding.Date"></span>
+            <label asp-for="Wedding.Date"></label>
+            <input asp-for="Wedding.Date">
+            <br>
+            <span asp-validation-for="Wedding.Address"></span>
+            <label asp-for="Wedding.Address"></label>
+            <input asp-for="Wedding.Address">
+            <br>
+            <button>Create</button>
+        </form>
+    </main>
+</body>
+</html>
