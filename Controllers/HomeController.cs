@@ -102,15 +102,7 @@ namespace WeddingPlanner.Controllers     //be sure to use your own project's nam
                 return RedirectToAction("Index");
             }
             Wrapper.User = ActiveUser;
-            foreach (Wedding wedding in _context.Weddings.ToList())
-            {
-                if (wedding.Date < DateTime.Now)
-                {
-                    _context.Weddings.Remove(wedding);
-                    _context.SaveChanges();
-                }
-            }
-            Wrapper.AllWeddings = _context.Weddings.Include(w => w.Guests).ThenInclude(g => g.User).ToList();
+            Wrapper.AllWeddings = _context.Weddings.Include(w => w.Guests).ThenInclude(g => g.User).Where(w => w.Date > DateTime.Now).ToList();
             Wrapper.CurrentUser = (int)HttpContext.Session.GetInt32("CurrentUser");
             return View("Dashboard", Wrapper);
         }
@@ -135,8 +127,7 @@ namespace WeddingPlanner.Controllers     //be sure to use your own project's nam
                 Form.Wedding.UserId = (int)HttpContext.Session.GetInt32("CurrentUser");
                 _context.Weddings.Add(Form.Wedding);
                 _context.SaveChanges();
-                Wedding NewWedding = _context.Weddings.Include(w => w.Guests).FirstOrDefault(w => w.WedderOne == Form.Wedding.WedderOne && w.WedderTwo == Form.Wedding.WedderTwo);
-                return RedirectToAction("Details", new { id = NewWedding.WeddingId });
+                return RedirectToAction("Details", new { id = Form.Wedding.WeddingId });
             }
             else
             {

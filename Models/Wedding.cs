@@ -9,7 +9,7 @@ namespace WeddingPlanner.Models
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             DateTime FormDate = Convert.ToDateTime(value);
-            if (FormDate > DateTime.Now)
+            if (FormDate >= DateTime.Now)
             {
                 return ValidationResult.Success;
             }
