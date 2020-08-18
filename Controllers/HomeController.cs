@@ -135,7 +135,7 @@ namespace WeddingPlanner.Controllers     //be sure to use your own project's nam
                 Form.Wedding.UserId = (int)HttpContext.Session.GetInt32("CurrentUser");
                 _context.Weddings.Add(Form.Wedding);
                 _context.SaveChanges();
-                Wedding NewWedding = _context.Weddings.FirstOrDefault(w => w.WedderOne == Form.Wedding.WedderOne && w.WedderTwo == Form.Wedding.WedderTwo);
+                Wedding NewWedding = _context.Weddings.Include(w => w.Guests).FirstOrDefault(w => w.WedderOne == Form.Wedding.WedderOne && w.WedderTwo == Form.Wedding.WedderTwo);
                 return RedirectToAction("Details", new { id = NewWedding.WeddingId });
             }
             else
